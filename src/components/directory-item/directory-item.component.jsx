@@ -1,20 +1,20 @@
 import React from 'react';
 
-import './menu-item.styles.scss';
+import './directory-item.styles.scss';
 
-const MenuItem = ({ title, imageUrl, size }) => (
-    <div className={`${size} menu-item`}>
+const DirectoryItem = ({ title, imageUrl }) => (
+    <div className='directory-item-container'>
         <div
             className='background-image'
             style={{
                 backgroundImage: `url(${imageUrl})`
             }}
         />
-        <div className='content'>
+        <div className='body'>
             <h1 className='title'>{title}</h1>
             <span className='subtitle'>SHOP NOW</span>
         </div>
     </div>
 );
 
-export default MenuItem;
+export default DirectoryItem;
