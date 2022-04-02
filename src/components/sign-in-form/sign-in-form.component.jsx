@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Button from 'components/button/button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import FormInput from 'components/form-input/form-input.component';
 
 import {
@@ -16,6 +16,9 @@ const defaultFormFields = {
 }
 
 const SignInForm = () => {
+    console.log(Button);
+    console.log(BUTTON_TYPE_CLASSES);
+
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
@@ -74,9 +77,12 @@ const SignInForm = () => {
                     value={password}
                 />
                 <div className="buttons-container">
-                    <Button buttonType='' type="submit">Sign In</Button>
+                    <
+                        // @ts-ignore
+                        Button type="submit">Sign In</Button>
                     <Button
-                        buttonType='google'
+                        buttonType={BUTTON_TYPE_CLASSES.google}
+                        type='button'
                         onClick={signInWithGoogle}
                     >
                         Google Sign In
