@@ -16,9 +16,6 @@ const defaultFormFields = {
 }
 
 const SignInForm = () => {
-    console.log(Button);
-    console.log(BUTTON_TYPE_CLASSES);
-
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
