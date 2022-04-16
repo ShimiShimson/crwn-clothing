@@ -1,39 +1,45 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { CartContext } from 'contexts/cart.context';
+import { addItemToCart, clearItemFromCart, removeItemFromCart } from 'store/cart/cart.action';
+import { selectCartItems } from 'store/cart/cart.selector';
 
 import './checkout-item.styles.scss';
 
-
 const CheckoutItem = ({ cartItem }) => {
-    const { name, imageUrl, price, quantity } = cartItem;
-    const { addItemToCart, removeItemFromCart, clearItemFromCart } = useContext(CartContext);
+  const dispatch = useDispatch();
+  const { name, imageUrl, price, quantity } = cartItem;
 
-    const addItemHandler = () => addItemToCart(cartItem);
-    const removeItemHandler = () => removeItemFromCart(cartItem);
-    const clearItemHandler = () => clearItemFromCart(cartItem)
+  const cartItems = useSelector(selectCartItems);
 
-    return (
-        <div className='checkout-item-container'>
-            <div className='image-container'>
-                <img src={imageUrl} alt={`${name}`} />
-            </div>
-            <span className='name'>{name}</span>
-            <span className='quantity'>
-                <div>
-                    <span className='arrow' onClick={removeItemHandler}>&#10094;</span>
-                </div>
-                {quantity}
-                <div>
-                    <span className='arrow' onClick={addItemHandler}>&#10095;</span>
-                </div>
-            </span>
-            <span className='price'>{price}</span>
-            <div
-                className='remove-button'
-                onClick={clearItemHandler}
-            >&#10005;</div>
+  const addItemHandler = () => dispatch(addItemToCart(cartItems, cartItem));
+  const removeItemHandler = () => dispatch(removeItemFromCart(cartItems, cartItem));
+  const clearItemHandler = () => dispatch(clearItemFromCart(cartItems, cartItem));
+
+  return (
+    <div className='checkout-item-container'>
+      <div className='image-container'>
+        <img src={imageUrl} alt={`${name}`} />
+      </div>
+      <span className='name'>{name}</span>
+      <span className='quantity'>
+        <div>
+          <span className='arrow' onClick={removeItemHandler}>
+            &#10094;
+          </span>
         </div>
-    )
-}
+        {quantity}
+        <div>
+          <span className='arrow' onClick={addItemHandler}>
+            &#10095;
+          </span>
+        </div>
+      </span>
+      <span className='price'>{price}</span>
+      <div className='remove-button' onClick={clearItemHandler}>
+        &#10005;
+      </div>
+    </div>
+  );
+};
 export default CheckoutItem;
