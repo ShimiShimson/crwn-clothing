@@ -66,10 +66,10 @@ export const getCategoriesAndDocuments = async () => {
     return data;
 }
 
-export const createUserDocumentFromAuth = async (userAuth, additionalInformation = { displayName: 'mike' }) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {
     if (!userAuth) return;
 
-    const userDocRef = await doc(db, 'users', userAuth.uid);
+    const userDocRef = doc(db, 'users', userAuth.uid);
 
     const userSnapshot = await getDoc(userDocRef);
 
